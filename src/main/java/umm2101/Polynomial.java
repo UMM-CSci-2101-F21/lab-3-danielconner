@@ -1,6 +1,6 @@
 package umm2101;
 
-// The two students who worked on this file are ***REPLACE*** and ***REPLACE***
+// The two students who worked on this file are Daniel and Connor
 // Students will implement equals for Node & minus and evaluate for Polynomial
 /******************************************************************************
   * 
@@ -39,9 +39,14 @@ public class Polynomial {
         }
         boolean equals(Node other) {
           //***************implement equals for nodes***************
-          return false; //this is here so that something happens
+          if(this.coef == other.coef | this.exp == other.exp){
+            return true;
+          }
+          return false;
+          }
+          //return false; //this is here so that something happens
         }
-    }
+    
 
     // 0    
     //this just gives each thing its default value, so no need to actually assign values

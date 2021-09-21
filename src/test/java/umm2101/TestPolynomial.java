@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-// The two students who worked on this file are ***REPLACE*** and ***REPLACE***
+// The two students who worked on this file are Daniel and Connor
 // There will be at least 20 assertions in this file
 
 public class TestPolynomial {
@@ -21,20 +21,28 @@ public class TestPolynomial {
   @BeforeEach
   public void setUp() {
     a = new Polynomial(1,1); //might look like this, for example
+    b = new Polynomial(5,1);
   }
    
   @DisplayName("Test adding polynomials")
   @Test
   public void testPlus() {
     /********* Test Plus *********/
+    Polynomial t = new Polynomial(6,1);
     //add two polys that are one node each and have the same power
-    
+    assertTrue(t.equals(a.plus(b)));
     //add two polys that are one node each and have different powers, first is higher degree
-    
+    Polynomial highPow = new Polynomial(2,9);
+    Polynomial p1 = new Polynomial(2,9);
+    Polynomial p1a = p1.plus(a);
+    assertTrue(p1a.equals(highPow.plus(a)));
     //add two polys that are one node each and have different powers, first is lower degree
-    
+    assertTrue(p1a.equals(a.plus(highPow)));
     //add two polys that include a diff # of nodes where first poly is shorter and higher degree
-
+    int[] lowparray = {1,2,3}
+    Polynomial low = new Polynomial(lowparray);
+    Polynomial comb = p1.plus(a.plus(low));
+    assertTrue(comb.equals(p1a.plus(low)));
     //add two polys that include a diff # of nodes where first poly is shorter and lower degree
     
     //add two polys that include a diff # of nodes where first poly is longer and higher degree
