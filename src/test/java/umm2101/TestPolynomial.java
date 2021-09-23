@@ -39,7 +39,7 @@ public class TestPolynomial {
     //add two polys that are one node each and have different powers, first is lower degree
     assertTrue(p1a.equals(a.plus(highPow)));
     //add two polys that include a diff # of nodes where first poly is shorter and higher degree
-    int[] lowparray = {1,2,3}
+    int[] lowparray = {1,2,3};
     Polynomial low = new Polynomial(lowparray);
     Polynomial comb = p1.plus(a.plus(low));
     assertTrue(comb.equals(p1a.plus(low)));
@@ -55,27 +55,81 @@ public class TestPolynomial {
   public void testMinus() {
     /********* Test Minus *********/
     //a minus b, one node each and have the same power
-    
+    Polynomial answer1 = new Polynomial(4, 1);
+    System.out.println("answer1 :" + answer1);
+    assertTrue(answer1.equals(b.minus(a)));
     //a minus b, one node each and have different powers, first poly (a) is higher degree
-    
+    Polynomial pHigh = new Polynomial(4, 5);
+    int[] answer2Array = {0, -1, 0, 0, 0, 4};
+    Polynomial answer2 = new Polynomial(answer2Array);
+    System.out.println("answer2 :" + answer2);
+    assertTrue(answer2.equals(pHigh.minus(a)));
     //a minus b, one node each and have different powers, first poly (a) is lower degree
-    
+    int[] answer3Array = {0, 1, 0, 0, 0, -4};
+    Polynomial answer3 = new Polynomial(answer3Array);
+    System.out.println("answer3 :" + answer3);
+    assertTrue(answer3.equals(a.minus(pHigh)));
     //a minus b, include a diff # of nodes where first poly is shorter and higher degree
-
+    int[] polySHArray = {0, 0, 0, 0, 4, 5}; // <---------------------------------------------  SH : Short and High
+    Polynomial polySH = new Polynomial(polySHArray);
+    int[] polyNormalArray = {1, 2, 3};
+    Polynomial polyNormal = new Polynomial(polyNormalArray);
+    int[] answer4Array = {-1, -2, -3, 0, 4, 5};
+    Polynomial answer4 = new Polynomial(answer4Array);
+    System.out.println("answer4 :" + answer4);
+    assertTrue(answer4.equals(polySH.minus(polyNormal)));
     //a minus b, include a diff # of nodes where first poly is shorter and lower degree
-    
+    int[] polySLArray = {1, 3}; //   <---------------------------------------------------------SL: Short and Low
+    Polynomial polySL = new Polynomial(polySLArray);
+    int[] answer5Array = {0, 1, -3};
+    Polynomial answer5 = new Polynomial(answer5Array);
+    System.out.println("answer5 :" + answer5);
+    assertTrue(answer5.equals(polySL.minus(polyNormal)));
     //a minus b, include a diff # of nodes where first poly is longer and higher degree
-
+    int[] polyLHArray = {0, 0, 1, 2, 3, 4}; //<---------------------------------------------------------LH: Long and High
+    Polynomial polyLH = new Polynomial(polyLHArray);
+    int[] answer6Array = {-1, -2, -2, 2, 3, 4};
+    Polynomial answer6 = new Polynomial(answer6Array);
+    System.out.println("answer6 :" + answer6);
+    assertTrue(answer6.equals(polyLH.minus(polyNormal)));
     //a minus b, include a diff # of nodes where first poly is longer and lower degree
+    int[] polyLLAray = {1, 2, 3, 4, 5}; //<---------------------------------------------------------LL: Long and Low
+    Polynomial polyLL = new Polynomial(polyLLAray);
+    int[] answer7Array = {1, 2, 3, 4, 1, -5};
+    Polynomial answer7 = new Polynomial(answer7Array);
+    System.out.println("answer7 :" + answer7);
+    assertTrue(answer7.equals(polyLL.minus(polySH))); //Recall polySH from test 4
   }
     
   @DisplayName("Test multiplying polynomials")
   @Test
   public void testTimes() {
     /********* Test Times *********/
-    // replace this comment with whatever you are testing (what is your first case)
+    // a times b, both are one node each
+    Polynomial answer1 = new Polynomial(5, 2);
+    System.out.println("answer1 :" + answer1);
+    assertTrue(answer1.equals(a.times(b)));
+
+    // a times b, second polynomial is larger than just 1x^1
+    Polynomial testPoly = new Polynomial(2, 3);
+    Polynomial answer2 = new Polynomial(10, 4);
+    System.out.println("answer2 :" + answer2);
+    assertTrue(answer2.equals(a.times(testPoly)));
     
-    // replace this comment with whatever you are testing (what is your second case)
+    // a times b, first polynomial is longer than the second polynomial
+    int[] polyLLAray = {1, 2, 3, 4, 5}; //<---------------------------------------------------------LL: Long and Low
+    Polynomial polyLL = new Polynomial(polyLLAray);
+    int[] answer3Array = {0, 1, 2, 3, 4, 5};
+    Polynomial answer3 = new Polynomial(answer3Array);
+    System.out.println("answer3 :" + answer3);
+    assertTrue(answer3.equals(polyLL.times(b)));
+
+    // a times b, the second polynomial is the zero polynomial
+    Polynomial zero = new Polynomial(0, 0);
+    //assertTrue(zero.equals(polyLL.times(zero)));     //<-------- Testing multiplication by 0 does not work
+    //assertTrue(zero.equals(zero.times(polyLL)));
+
+
   }
   
   @Test

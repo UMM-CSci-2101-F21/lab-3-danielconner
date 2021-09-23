@@ -118,6 +118,27 @@ public class Polynomial {
     public Polynomial minus(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial();
+        Node x = a.first.next;
+        Node y = b.first.next;
+        while (x != null || y != null) {
+            Node t = null;
+            if      (x == null)     { t = new Node(y.coef, y.exp);  y = y.next; }
+            else if (y == null)     { t = new Node(x.coef, x.exp);  x = x.next; }
+            else if (x.exp > y.exp) { t = new Node(x.coef, x.exp);  x = x.next; } 
+            else if (x.exp < y.exp) { t = new Node(y.coef, y.exp);  y = y.next; } 
+
+            else {
+                int coef = x.coef - y.coef;
+                int exp  = x.exp;
+                x = x.next;
+                y = y.next;
+                if (coef == 0) continue;
+                t = new Node(coef, exp);
+            }
+        
+            c.last.next = t;
+            c.last = c.last.next;
+        }
         return c;
     }
     
