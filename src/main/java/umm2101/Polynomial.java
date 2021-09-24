@@ -125,8 +125,9 @@ public class Polynomial {
     //************You will implement evaluate - please try to use test-driven development***
     public int evaluate(int num) {
       int total = 0;
-      for (int i = this.exp; i >= 0; i--)
-          total = i.coef + (num * total);
+      Polynomial a = this;
+      for (Node x = a.first.next; x!= null; x = x.next)
+          total = x.coef + (num * total);
       return total;
     }
 

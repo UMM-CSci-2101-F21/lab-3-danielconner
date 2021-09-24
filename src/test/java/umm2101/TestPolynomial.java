@@ -17,42 +17,53 @@ public class TestPolynomial {
   // You might want to have some polynomials you use in multiple tests
   Polynomial a;
   Polynomial b;
+  Polynomial c;
+  Polynomial d;
 
   @BeforeEach
   public void setUp() {
     a = new Polynomial(1,1); //might look like this, for example
-    b = new Polynomial(5,1);
+    b = new Polynomial(2,1);
+    c = new Polynomial(3,3);
+    d = new Polynomial(4,0);
   }
    
   @DisplayName("Test adding polynomials")
   @Test
   public void testPlus() {
     /********* Test Plus *********/
-    Polynomial t = new Polynomial(6,1);
     //add two polys that are one node each and have the same power
-    assertTrue(t.equals(a.plus(b)));
+    int[] arrayAB = {0,3}; 
+    Polynomial ab = new Polynomial(arrayAB); // polynomial with array parameter forms i[0]^0, i[1]^1, i[2]^2, etc.
+    assertTrue(ab.equals(a.plus(b)));
+
     //add two polys that are one node each and have different powers, first is higher degree
-    int[] p1array = {1,3};
-    Polynomial p1 = new Polynomial(p1array);
-    Polynomial p1a = (1,0);
-    Polynomial p1b = (3,2);
-    assertTrue(p1.equals(p1b.plus(p1a)));
+    int[] arrayAC = {0,1,0,3};
+    Polynomial ac = new Polynomial(arrayAC);
+    assertTrue(ac.equals(c.plus(a)));
+
     //add two polys that are one node each and have different powers, first is lower degree
-    assertTrue(p1.equals(p1a.plus(p1b)));
+    int[] arrayBD = {4,2};
+    Polynomial bd = new Polynomial(arrayBD);
+    assertTrue(bd.equals(d.plus(b)));
+
     //add two polys that include a diff # of nodes where first poly is shorter and higher degree
-    int[] lowparray = {1,2,2};
-    Polynomial low = new Polynomial(lowparray);
-    int[] combarray = {3,2,2,1,1};
-    Polynomial plowcomb = new Polynomial(combarray);
-    assertTrue(plowcomb.equals(p1.plus(low)));
+    int[] arrayCBD = {4,2,0,3};
+    Polynomial cbd = new Polynomial(arrayCBD);
+    assertTrue(cbd.equals(c.plus(bd)));
+
     //add two polys that include a diff # of nodes where first poly is shorter and lower degree
-    int[] longArray = {3,2,2,1,1,1,2,2};
-    Polynomial bigP = new Polynomial(longArray);
-    assertTrue(bigP.equals(low.plus(plowcomb)));
+    int[] arrayDAC = {4,1,0,3};
+    Polynomial dac = new Polynomial(arrayDAC);
+    assertTrue(dac.equals(d.plus(ac)));
+
     //add two polys that include a diff # of nodes where first poly is longer and higher degree
-    asssertTrue(bigP.equals(plowcomb.plus(low)));
+    int[] arrayACB = {0,2,0,3};
+    Polynomial acb = new Polynomial(arrayACB);
+    assertTrue(acb.equals(ac.plus(b)));
+
     //add two polys that include a diff # of nodes where first poly is longer and lower degree
-    assertTrue(plowcomb.equals(low.plus(p1)));
+    assertTrue(cbd.equals(bd.plus(c)));
   }
   
   @DisplayName("Test subtracting polynomials")
@@ -86,9 +97,12 @@ public class TestPolynomial {
   @Test
   public void testEvaluate() {
     // replace this comment with whatever you are testing (what is your first case)
-    
+    int[] array123 = {1,2,3};
+    Polynomial pArray123 = new Polynomial(array123);
+    assertEquals(6, pArray123.evaluate(1)); // Check that polynomial with any amount of nodes evaluates correctly
     
     // replace this comment with whatever you are testing (what is your second case)
+    assertEquals(1, a.evaluate(0)); // check that degree of 0 evaluates node to be 1
   }
   
   @Test
